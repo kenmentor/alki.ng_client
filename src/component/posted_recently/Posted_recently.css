@@ -1,0 +1,18 @@
+.more_cont{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:10px;
+    transform: translatey(-10px);
+    button{
+        background:transparent;
+        display:flex;
+        align-items: center;
+        gap:2px;
+        padding:5px 10px;
+        border:none;
+        color:white;
+        border-radius:5px;
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,151 @@
+
+  
+
+ "development": {
+    "username": "root",
+    "password": "09040410295",
+    "database": "alkidatabase",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+
+
+"development": {
+    "username": "ifo_37336720",
+    "password": "oJ0tr8zbPi5zA",
+    "database": "ifo_37336720_ifo_37336720",
+    "host": "sql203.inifinityfree.com",
+    "dialect": "mysql"
+  },
+
+
+
+
+{/*
+    <div className="job_grid">
+      <div className="job_box">
+        <img src="public\images (11) (11).jpeg" alt="" />
+        <div className="sub">
+        <div className="detial_box">
+          <div className="title">
+            web development for beginers
+          </div>
+          <div className="destination">
+            <div className="state">lagos</div>
+            <div className="location">yanki</div>
+            <div className="time">4 month ago</div>
+          </div>
+        </div>
+        <div className="action_btn">
+          <button onClick={toggle_d}>{full_d?'hide detials':'view details'}</button>
+        </div>
+        </div>
+        {full_d?<div className="full_description">
+          <button className='cancel' onClick={toggle_d}>x</button>
+          <div className="map">
+          <div style={{width: '100%',borderRadius:'5px'}}><iframe width="100%" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+            <a href="https://www.gps.ie/">gps trackers</a>
+            </iframe></div>
+          </div>
+          <ul className='detail'>
+            <h2 className='full_title'>web development for beginners</h2>
+            <li><span>state:</span>lagos.nigeria</li>
+            <li><span>pay:</span>$200-$300</li>
+            <div className="short_descript">
+              Lorem ipsum dolor sit amet consectetur adipisicing
+               elit. Odio nam facilis laudantium, maiores voluptas
+              sunt cumque velit. Cupiditate, assumenda incidunt!
+            </div>
+          </ul>
+
+        </div> : <></>}
+      </div>
+
+      <div className="job_box">
+        <img src="public\images (11) (11).jpeg" alt="" />
+        <div className="detial_box">
+          <div className="title">
+            web development for beginers
+          </div>
+          <div className="destination">
+            <div className="state">lagos</div>
+            <div className="location">yanki</div>
+            <div className="time">4 month ago</div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div className="job_box">
+        <img src="public\images (11) (11).jpeg" alt="" />
+        <div className="detial_box">
+          <div className="title">
+            web development for beginers
+          </div>
+          <div className="destination">
+            <div className="state">lagos</div>
+            <div className="location">yanki</div>
+            <div className="time">4 month ago</div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div className="job_box">
+        <img src="public\images (11) (11).jpeg" alt="" />
+        <div className="detial_box">
+          <div className="title">
+            web development for beginers
+          </div>
+          <div className="destination">
+            <div className="state">lagos</div>
+            <div className="location">yanki</div>
+            <div className="time">4 month ago</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className="job_box">
+        <img src="public\images (11) (11).jpeg" alt="" />
+        <div className="detial_box">
+          <div className="title">
+            web development for beginers
+          </div>
+          <div className="destination">
+            <div className="state">lagos</div>
+            <div className="location">yanki</div>
+            <div className="time">4 month ago</div>
+          </div>
+        </div>
+
+      </div>
+    </div>*/}
+  )
+  ///////////////////////////////////////////////////////////////////
+  div className="side_icon">
+        <button className="creat" ><img src="public\create (2).png" alt="" /></button>
+        {iscreate&&<Filter iscreate={iscreate} toggle_create={toggle_create}/>}
+        <button onClick={toggle_create}><img src="public\20240624_184240.png" alt="" /></button>
+        <img className="hide_btn" src="public\20240624_185034.png" alt="" onClick={hider} style={sidebar_ishiden?{background: 'transparent'}:{background:'#2f3b4b',
+          padding:'2px 5px',
+          borderRadius:'20px'
+        }}/>
+        <div className="sidebar" style={sidebar_ishiden?{right: '-190px'}:{right: '15px'}} >
+          <li>dark mode </li>
+          <li>terms and conditions </li>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+.fadein{
+    
+    opacity:0;
+    animation: fadein 1s ease-in-out forwards ;
+}
+.popin{
+    opacity: 0;
+    transform: scale(.8) ;
+    animation:popin 1s cubic-bezier(0.075, 0.82, 0.165, 1)  forwards;
+    animation-delay: 0s;
+
+}
+.slideinx{
+    opacity: 0;
+    transform: translatex(30px) scale(.9);
+    animation:slideinx 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation-delay: 0.7s;
+}
+
+.widthdec{
+    animation:widthdec 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    opacity: 0;
+    transform: translatey(-100px);
+    
+}
+.delay{
+    animation-delay: 0.2s;
+}
+.delayx{
+    animation-delay: 0.5s;
+}
+.delay1{
+    animation-delay: 0.6s;
+}
+.delay2{
+    animation-delay: 0.7s;
+}
+.delay3{
+    animation-delay: 0.8s;
+}
+@keyframes fadein {
+0%{
+  opacity:0;
+}
+100%{
+  opacity: 1;
+}
+}
+@keyframes popin {
+    
+    
+    100%{
+        transform: scale(1) ;
+        opacity: 1;
+    }
+}
+@keyframes slideinx {
+    100%{
+        transform: translate(0) scale(1);
+        opacity:1;
+    }
+}
+@keyframes widthdec {
+    100%{
+     
+        transform: translatey(0);
+        opacity: 1;
+      
+    }
+}

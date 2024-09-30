@@ -1,0 +1,28 @@
+/** @format */
+
+.people_cont {
+  padding: 5px;
+  color: white;
+ 
+}
+.searches_cont {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+}
+.searches {
+  background-color: #1e2633;
+  border-radius: 5px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  img {
+    height: 16px;
+  }
+}
+.peopleAlsoSearch_title {
+  font-size: 18px;
+  padding: 15px 0px;
+}

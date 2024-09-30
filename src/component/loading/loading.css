@@ -1,0 +1,45 @@
+.Loaning_container{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.loading_animate_cont{
+    background-color: #1e2633;
+    width: 80%;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.loading_animate{
+    background-color:#20a54f ;
+    width: 60%;
+    transform: translate(-90%);
+    height: 10px;
+    border-radius: 5px;
+    animation: loading 1.5s infinite linear;
+    animation-timing-function: ;
+    
+}
+@keyframes loading {
+  100%{
+    transform: translate(200%);
+  }
+    
+}
+.loadingx{
+  backdrop-filter: blur(1px);
+  background: #1e263386;
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right: 0;
+  z-index: 2;
+}

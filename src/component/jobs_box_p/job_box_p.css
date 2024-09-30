@@ -1,0 +1,81 @@
+/** @format */
+
+.job_box_p {
+  background-color: #1e2633;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  color: aliceblue;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #14191f;
+  font-style: normal;
+  font-size: 12px;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+.thumbnail_jobbox_p_cont {
+  background-color: #374646;
+  padding: 5px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  position: relative;
+  margin-bottom: 20px;
+  .thumbnail_jobbox_p {
+    height: 110%;
+    aspect-ratio: 1/1;
+    border-radius: 100px;
+    position: absolute;
+    bottom: -10px;
+  }
+}
+.description {
+  padding: 0 5px;
+  text-align: center;
+  font-style: normal;
+  height: 20%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.apply_btn_cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.apply_btn {
+  padding: 5px 20px;
+  border-radius: 15px;
+  color: #20a54e;
+  background-color: transparent;
+  border: none;
+  border: 1px solid #20a54e;
+  transition: 0.3s;
+  width: 40%;
+  &&:hover {
+    background-color: #20a54e;
+    color: #1e2633;
+  }
+}
+@media (min-width: 600px) {
+  .thumbnail_jobbox_p_cont {
+    height: 100px;
+
+    .description {
+      font-size: 15px;
+    }
+  }
+}
+@media (min-width: 750px) {
+  .thumbnail_jobbox_p {
+    .thumbnail_jobbox_p_cont {
+      height: 90px;
+    }
+    .description {
+      font-size: 15px;
+    }
+  }
+}

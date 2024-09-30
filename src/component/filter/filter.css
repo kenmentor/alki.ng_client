@@ -1,0 +1,105 @@
+/** @format */
+
+.backdrop {
+  background-color: #0f141a33;
+  backdrop-filter: blur(2px);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  transition: 1s;
+}
+.float_btn {
+  border-radius: 10px;
+  border: none;
+  position: fixed;
+  padding: 15px;
+  border-radius: 20px;
+  right: 10px;
+  z-index: 20;
+  bottom: 20%;
+  transition: 0.1s;
+  &:active {
+    transform: scale(1.5);
+  }
+}
+
+.filter_selector {
+  width: 90%;
+  padding: 10px;
+  backdrop-filter: blur;
+  display: flex;
+  border-radius: 5px;
+  gap: 20px;
+  .price {
+    width: 100%;
+  }
+  input {
+    width: 90%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+  }
+}
+.filter {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: rgb(177, 177, 177);
+  background-color: #243040;
+  box-shadow: 1px 1px 5px #0f141a;
+  transition: 0.3s;
+  z-index: 2;
+  .cancel {
+    right: 10px;
+    background-color: #20a54e;
+  }
+}
+.component {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: #808386;
+  font-weight: 500;
+}
+.filter_option{
+  background-color: #2f3b4b;
+  border: 1px solid #2f3b4b;
+  color: #c9d1db;
+  width: 100%;
+  height: 35px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.filter_option:focus {
+  outline: #20a54fb9 2px solid;
+}
+.filter_option:hover {
+  outline: #808386 1px solid;
+}
+@media (max-width: 400px) {
+  .filter {
+    top: 8%;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    .cancel {
+      right: 50px;
+    }
+  }
+  .component {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-weight: 500;
+  }
+  select {
+    font-size: 12px;
+  }
+}

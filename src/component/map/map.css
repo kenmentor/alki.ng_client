@@ -1,0 +1,11 @@
+/** @format */
+
+.map {
+  height: 200px;
+  background-color: #0f141a;
+  width: 100%;
+  padding: 1px;
+  border-radius: 5px;
+  height: 100%;
+  color:rgba(255, 255, 255, 0.089)
+}

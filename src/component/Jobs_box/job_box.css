@@ -1,0 +1,246 @@
+/** @format */
+
+.job_box {
+  background-color: #1e2633;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  color: aliceblue;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #14191f;
+  position: relative;
+  font-style: normal;
+
+}
+.button_container {
+  display: flex;
+  gap: 2px;
+  background-color: #353c47;
+  button {
+    transition: 0.1s;
+    width: 100%;
+    padding: 8px 2px;
+    font-size: 15px;
+    border: none;
+    color: white;
+    background-color: #1e2633;
+    border-top: #353c47 1px solid;
+    cursor: pointer;
+    &:active {
+      background-color: #353c47;
+    }
+  }
+}
+.chat_btn{
+  padding:0;
+}
+
+.backdrop_chat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  cursor: default;
+}
+.box {
+  display: flex;
+  gap: 10px;
+  font-size: 17px;
+  height: 150px;
+}
+.thumnail {
+  width: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px 0px 0px 0px;
+  }
+}
+.describtion {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 10px;
+
+  .location_cont {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+  }
+}
+
+.description_tag {
+  background-color: #353c47;  
+  padding: 3px;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.price {
+  font-size: 18px;
+  font-weight: 400;
+  color: #20a54e;
+}
+
+@media (min-width: 600px) {
+  .box {
+    display: flex;
+    height: 170px;
+  }
+  .thumnail {
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 5px 0px 0px 0px;
+    }
+  }
+  .describtion {
+    gap: 13px;
+    width: 80%;
+    .location_cont {
+      font-size: 18px;
+    }
+  }
+
+  .description_tag {
+    width: 100px;
+    padding: 5px;
+  }
+  .price {
+    font-size: 19px;
+  }
+}
+@media (min-width: 750px) {
+  .box {
+    display: flex;
+    height: 200px;
+  }
+  .describtion {
+    gap: 13px;
+    .location_cont {
+      font-size: 18px;
+    
+    }
+  }
+  .title {
+    font-size: 10px;
+    width: 220px;
+  }
+  .description_tag {
+    width: 100px;
+    padding: 5px;
+  }
+  .price {
+    font-size: 19px;
+  }
+}
+@media (min-width: 900px) {
+  .job_box {
+    background-color: #1e2633;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    color: aliceblue;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px #14191f;
+  }
+  .button_container {
+    display: flex;
+    gap: 2px;
+    background-color: #353c47;
+    button {
+      width: 100%;
+      padding: 8px 2px;
+      font-size: 15px;
+      border: none;
+      color: white;
+      background-color: #1e2633;
+      border-top: #353c47 1px solid;
+    }
+  }
+  .box {
+    display: flex;
+    gap: 10px;
+    font-size: 17px;
+    height: 150px;
+  }
+  .thumnail {
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 5px 0px 0px 0px;
+    }
+  }
+  .describtion {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 10px;
+
+    .location_cont {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      
+    }
+  }
+  .title {
+    width: 200px;
+    font-weight: 400;
+    font-size: 10px;
+
+    
+  }
+  .description_tag {
+    background-color: #353c47;
+    padding: 3px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+  }
+  .price {
+    font-size: 18px;
+    font-weight: 400;
+    color: #20a54e;
+  }
+}
+@media (min-width:900px) {
+  .wrap{
+    max-width: 200px;
+    font-size: 16px;
+  }
+}
+@media (max-width:900px) {
+  .wrap{
+    max-width: 270px;
+    font-size: 20px;
+  }
+}
+@media (max-width:500px) {
+  .wrap{
+    max-width: 200px;
+    font-size: 15px;
+  }
+}

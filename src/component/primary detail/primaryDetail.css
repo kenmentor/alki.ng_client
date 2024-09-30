@@ -1,0 +1,27 @@
+/** @format */
+.primary_details {
+  box-shadow: 1px 1px 5px #0f131a;
+  padding:10px;
+  border-radius: 5px;
+    h2{
+        color: #20a54f;
+        padding: 10px 0px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+    }
+  .title {
+
+    font-weight: 500;
+    color: #20a54f;
+    font-size: 18px;
+  }
+  ul {
+    font-size: 18px;
+  }
+  li{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+  }
+}
