@@ -56,7 +56,11 @@ const Create = () => {
     field: "",
   };
   let stateElement = states.map((data, key) => {
-    return <option value={data}> </option>;
+    return (
+      <option value={data} key={key}>
+        {" "}
+      </option>
+    );
   });
   function handleForm(e) {
     let field = e.target;
