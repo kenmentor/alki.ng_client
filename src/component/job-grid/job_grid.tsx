@@ -4,10 +4,8 @@ import React, { useEffect, useState } from "react";
 import "./job-grid.css";
 import Job_box from "../Jobs_box/job_box";
 import PeopleSearch from "../peopleSeach/PeopleSearch";
-import Bussadd from "../bussAdds/Bussadd";
+//import Bussadd from "../bussAdds/Bussadd";
 import Job_box_p from "../jobs_box_p/Job_box_p";
-import { Link } from "react-router-dom";
-import Contact from "../contact/contact";
 import Posted_recently from "../posted_recently/posted_recently";
 
 const Job_grid = ({
@@ -72,7 +70,7 @@ const Job_grid = ({
           setsearchQuery={setsearchQuery}
           setkeypress={setkeypress}
         />
-        <Bussadd />
+        {/*<Bussadd />*/}
         <Posted_recently
           limit={3}
           placeholder={"you may be interested in "}

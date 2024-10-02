@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "./create.css";
 import Job_box from "../Jobs_box/job_box";
 
-const addBussAdd = ({ setpage } = prop) => {
+const addBussAdd = () => {
   function home_p() {
     setpage(true);
   }

@@ -18,10 +18,9 @@
     height: 35px;
   }
   h2 {
-    
     white-space: nowrap;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     width: 90%;
   }
 }
@@ -29,7 +28,6 @@
   padding: 55px 10px;
 }
 .contact_jobD_btn {
-  width: 30%;
   padding: 10px 10px;
   border-radius: 7px;
   border: none;
@@ -59,7 +57,7 @@
   object-fit: cover;
   border-radius: 10px;
   object-position: center;
-  img{
+  img {
     z-index: 0;
   }
 }
@@ -69,24 +67,24 @@
   flex-direction: column;
   width: 100%;
 }
-.title_price{
+.title_price {
   box-shadow: 1px 1px 5px #0f131a;
   border-radius: 5px;
-  padding:10px ;
+  padding: 10px;
   display: flex;
   align-items: left;
   flex-direction: column;
-  gap:5px;
-  h2{
+  gap: 5px;
+  h2 {
     font-size: 18px;
   }
-  h5{
+  h5 {
     color: #ffffff94;
     display: flex;
     align-items: center;
     gap: 5px;
     font-size: 14px;
-    img{
+    img {
       height: 18px;
     }
   }
@@ -95,7 +93,6 @@
   .detail_box {
     flex-direction: column;
     gap: 15px;
-    
   }
 
   .thumnail_detail {
@@ -103,7 +100,7 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-   
+
     &&:active {
       height: 100%;
     }
@@ -112,13 +109,12 @@
   .other_information {
     height: 500px;
   }
-  .title_price{
-    h5{
+  .title_price {
+    h5 {
       font-size: 14px;
     }
-    h2{
+    h2 {
       font-size: 16px;
     }
   }
 }
-

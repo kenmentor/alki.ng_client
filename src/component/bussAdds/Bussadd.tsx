@@ -1,4 +1,4 @@
-/** @format */
+/** @format 
 
 import React, { useState, useEffect } from "react";
 import "./bussAdds.css";
@@ -23,7 +23,7 @@ const Bussadd = () => {
   }, []);
   let bussadd = data.map((data) => {
     return (
-      <div className="bussAdd_adds" key={data.id}>
+      <div className="bussAdd_adds" key={data.}>
         <img src="/Spinner-3 (1).gif" alt="" />
         <p>hello</p>
       </div>
@@ -45,3 +45,4 @@ const Bussadd = () => {
 };
 
 export default Bussadd;
+*/

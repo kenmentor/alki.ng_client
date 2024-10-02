@@ -10,7 +10,6 @@
   box-shadow: 1px 1px 5px #14191f;
   position: relative;
   font-style: normal;
-
 }
 .button_container {
   display: flex;
@@ -31,8 +30,8 @@
     }
   }
 }
-.chat_btn{
-  padding:0;
+.chat_btn {
+  padding: 0;
 }
 
 .backdrop_chat {
@@ -72,12 +71,11 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    
   }
 }
 
 .description_tag {
-  background-color: #353c47;  
+  background-color: #353c47;
   padding: 3px;
   width: 90px;
   display: flex;
@@ -85,8 +83,8 @@
   align-items: center;
   border-radius: 5px;
   white-space: nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .price {
   font-size: 18px;
@@ -134,7 +132,6 @@
     gap: 13px;
     .location_cont {
       font-size: 18px;
-    
     }
   }
   .title {
@@ -201,15 +198,12 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      
     }
   }
   .title {
     width: 200px;
     font-weight: 400;
     font-size: 10px;
-
-    
   }
   .description_tag {
     background-color: #353c47;
@@ -226,21 +220,42 @@
     color: #20a54e;
   }
 }
-@media (min-width:900px) {
-  .wrap{
+@media (min-width: 900px) {
+  .wrap {
     max-width: 200px;
     font-size: 16px;
   }
 }
-@media (max-width:900px) {
-  .wrap{
+@media (max-width: 900px) {
+  .wrap {
     max-width: 270px;
     font-size: 20px;
   }
 }
-@media (max-width:500px) {
-  .wrap{
+@media (max-width: 500px) {
+  .wrap {
     max-width: 200px;
     font-size: 15px;
   }
+}
+@media (max-width: 400px) {
+  .thumnail {
+    width: 130%;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 5px 0px 0px 0px;
+    }
+  }
+  .title {
+    font-size: 14px;
+    width: 20px;
+  }
+  .wrap {
+  
+  max-width:150px;
+
+}
 }

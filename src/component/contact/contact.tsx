@@ -1,6 +1,6 @@
 /** @format */
 
-import { React, useState } from "react";
+import { React, useState, ChangeEvent, FormEvent } from "react";
 import "./contact.css";
 import {
   MdEmail,
@@ -36,7 +36,7 @@ const Contact = ({
     channelName: "whatApp",
   });
   let [Channeldrop, setChanneldrop] = useState(false);
-  function format_num(number, m) {
+  function format_num(number: string, m: boolean) {
     let formated = number;
     if (number.length === 11) {
       formated = number.slice(1);
@@ -46,7 +46,7 @@ const Contact = ({
     return formated;
   }
   console.log();
-  function handle_change(e) {
+  function handle_change(e: ChangeEvent<HTMLInputElement>) {
     setmessage(e.target.value);
   }
   function toogle_channeldrop() {
@@ -54,7 +54,7 @@ const Contact = ({
   }
   function handle_backdrop() {
     home
-      ? setcontact((prev) => ({ ...prev, chat_state: false }))
+      ? setcontact((prev: Object) => ({ ...prev, chat_state: false }))
       : setcontact(false);
   }
 

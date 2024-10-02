@@ -1,38 +1,50 @@
 /** @format */
 
-import React, { useState } from "react";
+/** @format */
+
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./create.css";
-import Job_box from "../Jobs_box/job_box";
+import Job_box from "../Jobs_box/job_box"; // PascalCase for components
 import { Link } from "react-router-dom";
-import Job_box_p from "../jobs_box_p/Job_box_p";
+import Job_box_p from "../jobs_box_p/Job_box_p"; // PascalCase for components
 import "../costom_styles/animation.css";
-import { FaBeer, FaDonate, FaGoodreads, FaTiktok } from "react-icons/fa";
-import {
-  MdArrowBack,
-  MdArrowBackIos,
-  MdCancel,
-  MdCreate,
-  MdDescription,
-  MdDone,
-  MdError,
-  MdFilter1,
-  MdFilterBAndW,
-  MdFilterList,
-  MdFilterListAlt,
-  MdGppGood,
-  MdTitle,
-} from "react-icons/md";
+import { MdArrowBackIos, MdCancel, MdDone, MdError } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import Loadingx from "../loading/Loadingx";
 import states from "../../local_data/states";
-const Create = () => {
-  let [postcomplete, setpostcomplete] = useState();
-  let [post, setpost] = React.useState({});
-  let [prevImage, setprevImage] = useState("");
-  let [stage, setstage] = React.useState(1);
-  let [servermessage, setservermessage] = useState("");
-  let [loadingx, setloadingx] = useState(false);
-  let [form, setForm] = React.useState({
+
+// Define types
+type FormState = {
+  thumnail: string;
+  title: string;
+  description: string;
+  contact_num: string;
+  price: number;
+  state: string;
+  LGA: string;
+  country: string;
+  type: string;
+};
+
+type Location = {
+  lat: number;
+  lon: number;
+};
+
+type Error = {
+  errostate: boolean;
+  erromesage: string;
+  field: string;
+};
+
+const Create: React.FC = () => {
+  const [postcomplete, setPostComplete] = useState(undefined);
+  const [post, setPost] = useState<Record<string, any>>({});
+  const [prevImage, setPrevImage] = useState<string>("");
+  const [stage, setStage] = useState<number>(1);
+  const [serverMessage, setServerMessage] = useState<string>("");
+  const [loadingx, setLoadingx] = useState<boolean>(false);
+  const [form, setForm] = useState<FormState>({
     thumnail: "",
     title: "",
     description: "",
@@ -43,188 +55,155 @@ const Create = () => {
     country: "nigeria",
     type: "casual_job",
   });
-  let [image, setimage] = useState(null);
-  let [location, setlocation] = useState({
+  const [image, setImage] = useState<File | null>(null);
+  const [location, setLocation] = useState<Location>({
     lat: 11111,
     lon: 10000,
   });
-  let [progress, setprogress] = React.useState(0);
+  const [progress, setProgress] = useState<number>(0);
 
-  let erro = {
+  const erro: Error = {
     errostate: true,
-    erromesage: `you can not submit an empty form`,
+    erromesage: `you cannot submit an empty form`,
     field: "",
   };
-  let stateElement = states.map((data, key) => {
-    return (
-      <option value={data} key={key}>
-        {" "}
-      </option>
-    );
-  });
-  function handleForm(e) {
-    let field = e.target;
-    console.log(field.value);
-    setForm((prevData) => {
-      return { ...prevData, [field.name]: field.value };
-    });
-    console.log(form);
-  }
-  function handleradio(e) {
-    let value = e.target.id;
-    setForm((prev) => {
-      return { ...prev, type: value };
-    });
-  }
 
-  function reduceProgress() {
-    setprogress((prevProgress) => {
-      return prevProgress - 25;
-    });
-  }
+  const stateElement = states.map((data, key) => (
+    <option value={data} key={key}>
+      {data}
+    </option>
+  ));
 
-  function increasProgress() {
-    setprogress((prevProgress) => {
-      return prevProgress + 25;
-    });
-  }
+  const handleForm = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-  function next(e) {
+  const handleRadio = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.id;
+    setForm((prev) => ({ ...prev, type: value }));
+  };
+
+  const reduceProgress = () => {
+    setProgress((prevProgress) => prevProgress - 25);
+  };
+
+  const increaseProgress = () => {
+    setProgress((prevProgress) => prevProgress + 25);
+  };
+
+  const next = (e: FormEvent) => {
     e.preventDefault();
-    increasProgress();
-    console.log(form.thumnail);
-    setstage((prevStage) => {
-      if (prevStage < 4) {
-        return prevStage + 1;
-      } else {
-        return prevStage;
-      }
-    });
-  }
+    increaseProgress();
+    setStage((prevStage) => (prevStage < 4 ? prevStage + 1 : prevStage));
+  };
 
-  function back(e) {
+  const back = (e: FormEvent) => {
     e.preventDefault();
     reduceProgress();
-    setstage((prevStage) => {
-      if (prevStage > 1) {
-        return prevStage - 1;
-      } else {
-        return prevStage;
-      }
-    });
-  }
+    setStage((prevStage) => (prevStage > 1 ? prevStage - 1 : prevStage));
+  };
 
-  function getImage(e) {
+  const getImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setprevImage(URL.createObjectURL(e.target.files[0]));
-    setimage(e.target.files[0]);
-    console.log(e.target.fies[0]);
-  }
+    if (e.target.files) {
+      setPrevImage(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.files[0]);
+    }
+  };
 
-  console.log(image);
-  console.log(location.lon);
+  const geolocation = async (address: string): Promise<void> => {
+    await console.log("location data...");
+    const apiKey = "your-api-key";
+    try {
+      const response = await fetch(
+        `https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(
+          address
+        )}&apiKey=${apiKey}`
+      );
+      const data = await response.json();
+      const { lat, lng } = data.items[0].position;
+      setLocation({ lat, lon: lng });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const bundleData = () => {
+    console.log("bundling data...");
     const formData = new FormData();
-    async function geolocation(address) {
-      let apikey = "mfOshsZsWIrNYJO4ul__8Nq3gva8mK7zcFprkd_3ziU";
-      try {
-        fetch(
-          `https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(
-            address
-          )}&apiKey=mfOshsZsWIrNYJO4ul__8Nq3gva8mK7zcFprkd_3ziU`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            const { lat, lng } = data.items[0].position;
-            setlocation({
-              lat: lat,
-              lon: lng,
-            });
-            console.log("kekeke 1");
-            console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-          });
-      } catch (erro) {
-        console.log(erro);
-      }
-    }
+    if (image) formData.append("file", image);
+    formData.append("title", form.title.toLowerCase());
+    formData.append("description", form.description);
+    formData.append("contact_num", form.contact_num);
+    formData.append("price", form.price.toString());
+    formData.append("state", form.state);
+    formData.append("country", form.country.toLowerCase());
+    formData.append("LGA", form.LGA);
+    formData.append("type", form.type);
+    formData.append("lon", location.lon.toString());
+    formData.append("lat", location.lat.toString());
+    return formData;
+  };
 
-    // Example usage
-    function bundle_data() {
-      formData.append("file", image);
-      formData.append("title", form.title);
-      formData.append("description", form.description);
-      formData.append("contact_num", form.contact_num);
-      formData.append("price", form.price);
-      formData.append("state", form.state);
-      formData.append("country", form.country);
-      formData.append("LGA", form.LGA);
-      formData.append("type", form.type.toString());
-      formData.append("lon", location.lon);
-      formData.append("lat", location.lat);
+  const sendData = async (form: object) => {
+    const url = "http://localhost:3001/alki/post_jobs";
+    try {
+      await console.log("sending data");
+      const response = await fetch(url, {
+        method: "POST",
+        body: form,
+      });
+      alert(response.ok);
+      setPostComplete(true);
+      setServerMessage("Job posted successfully!");
+    } catch (error) {
+      console.error(error);
+      setPostComplete(false);
+    } finally {
+      setLoadingx(false);
+    }
+  };
 
-      console.log("bundoly data 2");
-      console.log(formData);
-    }
-    async function send_data() {
-      let url = "http://localhost:3001/alki/post_jobs";
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          body: formData,
-        }).then((res) => {
-          alert(res.ok);
-          setpostcomplete(true);
-          console.log("sending data 3");
-          setservermessage(res.message);
-        });
-      } catch (error) {
-        setpostcomplete(false);
-        console.log(error);
-      } finally {
-        setloadingx(false);
-      }
-    }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     await geolocation(`${form.LGA} ${form.state} ${form.country}`)
-      .then(() => bundle_data())
-      .then(() => send_data());
-  }
-  console.log(progress);
+      .then(() => bundleData())
+      .then((form) => sendData(form));
+  };
 
-  function validate_form(fields) {
+  const validateForm = (fields: FormState): Error => {
     const { title, description, contact_num, price, state, country, LGA } =
       fields;
 
     if (!title) {
-      erro.erromesage = "you need to input a title";
-      erro.errostate = true;
-      erro.field = "title";
-      return erro;
+      return {
+        errostate: true,
+        erromesage: "Title is required",
+        field: "title",
+      };
     }
     if (!state) {
-      erro.erromesage = "you need to input a state it helps people locate you";
-      erro.errostate = true;
-      erro.field = "state";
-      return erro;
+      return {
+        errostate: true,
+        erromesage: "State is required",
+        field: "state",
+      };
     }
     if (!LGA) {
-      erro.errostate = false;
-      erro.erromesage = "your address is empty ";
-      erro.field = "addres";
-      return erro;
+      return { errostate: true, erromesage: "LGA is required", field: "LGA" };
     }
     if (contact_num.length < 11 || contact_num.length > 13) {
-      erro.erromesage = "the number is inevalid";
-      erro.errostate = true;
-      erro.field = "contact_number";
-      return erro;
-    } else {
-      erro.erromesage = "";
-      erro.errostate = false;
-      return erro;
+      return {
+        errostate: true,
+        erromesage: "Invalid contact number",
+        field: "contact_num",
+      };
     }
-  }
+    return { errostate: false, erromesage: "", field: "" };
+  };
 
   return (
     <>
@@ -379,7 +358,7 @@ const Create = () => {
                   <input
                     type="radio"
                     name="job_type"
-                    onChange={handleradio}
+                    onChange={handleRadio}
                     id="professional_job"
                   />
                   <p className="label"> professional job</p>
@@ -388,7 +367,7 @@ const Create = () => {
                   <input
                     type="radio"
                     name="job_type"
-                    onChange={handleradio}
+                    onChange={handleRadio}
                     id="casual_job"
                   />
                   <p className="label"> casual job</p>
@@ -397,7 +376,7 @@ const Create = () => {
                   <input
                     type="radio"
                     name="job_type"
-                    onChange={handleradio}
+                    onChange={handleRadio}
                     id="remote_job"
                   />
                   <p className="label"> remote job</p>
@@ -406,7 +385,7 @@ const Create = () => {
                   <input
                     type="radio"
                     name="job_type"
-                    onChange={handleradio}
+                    onChange={handleRadio}
                     id="Full_time_job"
                   />
                   <p className="label"> Full time job</p>
@@ -415,7 +394,7 @@ const Create = () => {
                   <input
                     type="radio"
                     name="job_type"
-                    onChange={handleradio}
+                    onChange={handleRadio}
                     id="part_time_job"
                   />
                   <p className="label"> part time job</p>
@@ -427,13 +406,13 @@ const Create = () => {
             <div className="stage">
               <div
                 className={
-                  validate_form(form).errostate ? `erro_message` : "no_erro"
+                  validateForm(form).errostate ? `erro_message` : "no_erro"
                 }
               >
                 <div className="icon">
                   <MdCancel size={20} />
                 </div>
-                {validate_form(form).erromesage}
+                {validateForm(form).erromesage}
               </div>
 
               <h2>preview post</h2>
@@ -477,7 +456,7 @@ const Create = () => {
                 />
                 <h1>Succesfully Posted</h1>
                 <Link to={"/"}>
-                  {servermessage}
+                  {serverMessage}
                   <button className="next">ok </button>
                 </Link>
               </div>
@@ -490,7 +469,7 @@ const Create = () => {
                 <h1>an erro occured</h1>
                 <Link to={"/"}>
                   <button className="next">try again later</button>
-                  {servermessage}
+                  {serverMessage}
                 </Link>
               </div>
             </div>
@@ -515,10 +494,11 @@ const Create = () => {
                 className="next slidex"
                 type="submit"
                 onClick={() => {
-                  !erro.errostate && handleSubmit(event);
-                  !erro.errostate && setloadingx(true);
+                  !validateForm(form).errostate && handleSubmit(event);
+                  !validateForm(form).errostate && setLoadingx(true);
+                  console.log(form);
                 }}
-                onClickCapture={() => !erro.errostate && increasProgress()}
+                onClickCapture={() => !erro.errostate && increaseProgress()}
               >
                 post
               </button>

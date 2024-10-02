@@ -7,9 +7,7 @@ import { MdComputer, MdFacebook, MdIosShare } from "react-icons/md";
 import { Link, useHref } from "react-router-dom";
 const Footer = () => {
   let [isFeedback, setisFeedback] = useState(false);
-  function toggle_isFeedback() {
-    setisFeedback((prev) => !prev);
-  }
+
   return (
     <>
       <div className="footer" style={!isFeedback ? { display: "none" } : {}}>

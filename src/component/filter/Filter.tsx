@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./filter.css";
 import { MdFilterCenterFocus } from "react-icons/md";
 import states from "../../local_data/states";
@@ -14,22 +14,22 @@ const Filter = ({
 } = props) => {
   let [moreFilter, setmoreFilter] = useState(false);
 
-  function handle_jobtype(e) {
+  function handle_jobtype(e: ChangeEvent<HTMLInputElement>) {
     console.log(e.target.value);
-    setfilter_input((predata) => {
+    setfilter_input((predata: object) => {
       return { ...predata, jobtype: `${e.target.value}` };
     });
   }
-  function handle_joblocation(e) {
+  function handle_joblocation(e: ChangeEvent<HTMLInputElement>) {
     console.log(e.target.value);
-    setfilter_input((predata) => {
+    setfilter_input((predata: object) => {
       return { ...predata, joblocation: `${e.target.value}` };
     });
   }
   function handle_jobprice(e) {
     let value = e.target.value;
     console.log(value);
-    setfilter_input((predata) => {
+    setfilter_input((predata: object) => {
       if (value == 0) {
         return { ...predata, max_price: 1000000000000000, min_price: 1 };
       }
@@ -71,14 +71,14 @@ const Filter = ({
   function toggle_more_filter() {
     setmoreFilter((prev) => !prev);
   }
-  function handle_price(e) {
-    setfilter_input((prev) => {
+  function handle_price(e: ChangeEvent<HTMLInputElement>) {
+    setfilter_input((prev: object) => {
       return { ...prev, [e.target.name]: [e.target.value] };
     });
   }
   function handlefloat() {
     setmoreFilter(false);
-    setfilter_input((prev) => {
+    setfilter_input((prev: object) => {
       return { ...prev, max_price: 100000000000000000000, min_price: 0 };
     });
   }
