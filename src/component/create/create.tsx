@@ -1,6 +1,5 @@
 /** @format */
 
-/** @format */
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./create.css";
