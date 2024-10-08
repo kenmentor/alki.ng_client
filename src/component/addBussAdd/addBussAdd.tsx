@@ -110,6 +110,7 @@ const addBussAdd = () => {
                 type="file"
                 className="img_selector"
                 onChange={getImage}
+                
                 name="thumnail"
                 value={form.thumnail}
               />
