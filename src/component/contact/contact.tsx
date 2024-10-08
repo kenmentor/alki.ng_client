@@ -10,15 +10,23 @@ import {
   MdSend,
 } from "react-icons/md";
 import { FaUser, FaUserSlash, FaWhatsapp } from "react-icons/fa";
+interface contactprops {
+  price: string;
+  type: string;
+  title: string;
+  contact_num: string;
+  home: boolean;
+  setContact: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Contact = ({
-  setcontact,
+const Contact: React.FC<contactprops> = ({
+  setContact,
   price,
   type,
   title,
   contact_num,
   home,
-} = prop) => {
+}) => {
   let [message, setmessage] = useState(
     `Good Day \n I saw your job post (${title}) on alki.ng, and decideded to reach out to you to make  known my interest `
   );
@@ -54,8 +62,8 @@ const Contact = ({
   }
   function handle_backdrop() {
     home
-      ? setcontact((prev: Object) => ({ ...prev, chat_state: false }))
-      : setcontact(false);
+      ? setContact((prev: Object) => ({ ...prev, chat_state: false }))
+      : setContact(false);
   }
 
   return (

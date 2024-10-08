@@ -1,6 +1,5 @@
 /** @format */
 
-
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import "./create.css";
 import Job_box from "../Jobs_box/job_box"; // PascalCase for components

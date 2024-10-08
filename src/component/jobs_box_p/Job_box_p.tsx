@@ -3,7 +3,8 @@
 import React from "react";
 import "./job_box_p.css";
 import { Link, useNavigate } from "react-router-dom";
-const Job_box_p = ({ thumbnail, description, id, clickable } = props) => {
+const Job_box_p = (props) => {
+  const { thumbnail, description, id, clickable } = props;
   let [social_media, setsocial_media] = React.useState(false);
   let [full_d, setfull_d] = React.useState(false);
   const navigate = useNavigate();

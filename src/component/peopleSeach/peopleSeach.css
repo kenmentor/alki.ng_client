@@ -3,7 +3,6 @@
 .people_cont {
   padding: 5px;
   color: white;
- 
 }
 .searches_cont {
   display: flex;
@@ -18,9 +17,6 @@
   align-items: center;
   cursor: pointer;
   gap: 10px;
-  img {
-    height: 16px;
-  }
 }
 .peopleAlsoSearch_title {
   font-size: 18px;

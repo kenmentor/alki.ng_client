@@ -1,55 +1,72 @@
 /** @format */
+
 import React, { useEffect, useState } from "react";
 import "./peopleSeach.css";
-import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-const PeopleSearch = (props) => {
-  let {setsearchQuery,setdata,setkeypress} = props
-  let [peoplesearch, setpeoplesearch] = useState([]);
-  let [isLoading, setIsloading] = useState(true);
-  let[query,setqeury]=useState('')
-///////////////////////////
-  useEffect(() => {
-    let fetchData = async () => {
 
+// Define the types for the props
+interface PeopleSearchProps {
+  setsearchQuery: (query: string) => void;
+  setdata: React.Dispatch<React.SetStateAction<any[]>>;
+  setkeypress: React.Dispatch<React.SetStateAction<string>>;
+}
+
+// Define the structure of each search item
+interface SearchItem {
+  id: string;
+  title: string;
+}
+
+const PeopleSearch: React.FC<PeopleSearchProps> = ({
+  setsearchQuery,
+  setkeypress,
+}) => {
+  const [peoplesearch, setpeoplesearch] = useState<SearchItem[]>([]);
+  const [isLoading, setIsloading] = useState<boolean>(true);
+  const [query, setqeury] = useState<string>("");
+
+  // Fetch data from API on component mount
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        await fetch(`http://localhost:3001/alki/peopleSearch`)
-          .then((res) => res.json())
-          .then((data) => setpeoplesearch(data));
+        const response = await fetch(`http://localhost:3001/alki/peopleSearch`);
+        const data = await response.json();
+        setpeoplesearch(data);
         setIsloading(false);
-        console.log((peoplesearch))
       } catch (error) {
         console.log(error);
-      } finally {
       }
     };
     fetchData();
   }, []);
-  
-  function handleClick(text){
-    setsearchQuery(text)
-    setkeypress('Enter')
-  }
-/////////////////////////////////
+
+  // Handle search click
+  const handleClick = (text: string) => {
+    setsearchQuery(text);
+    setkeypress("Enter");
+  };
+
+  // Render searches when loading is complete
   if (!isLoading) {
-    let seaerches = peoplesearch.map((text) => {
-      return (
-        
-          <div key ={text.id} className="searches" onClick={()=>handleClick(text.title)}>
-          
-            <FaSearch opacity={0.6}/>
-            {text.title}
-          </div>
-          
-      );
-    });
+    const searches = peoplesearch.map((text) => (
+      <div
+        key={text.id}
+        className="searches"
+        onClick={() => handleClick(text.title)}
+      >
+        <FaSearch opacity={0.6} /> {text.title}
+      </div>
+    ));
+
     return (
       <div className="people_cont">
-        <h2 className="peopleAlsoSearch_title">people also search for:</h2>
-        <div className="searches_cont">{seaerches}</div>
+        <h2 className="peopleAlsoSearch_title">People also search for:</h2>
+        <div className="searches_cont">{searches}</div>
       </div>
     );
   }
+
+  return null; // In case loading is still in progress
 };
 
 export default PeopleSearch;

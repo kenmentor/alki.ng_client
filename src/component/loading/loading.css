@@ -1,45 +1,112 @@
-.Loaning_container{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-.loading_animate_cont{
-    background-color: #1e2633;
-    width: 80%;
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
+/** @format */
+.loading_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-.loading_animate{
-    background-color:#20a54f ;
-    width: 60%;
-    transform: translate(-90%);
-    height: 10px;
-    border-radius: 5px;
-    animation: loading 1.5s infinite linear;
-    animation-timing-function: ;
-    
+.search_circle {
+  width: 100px;
+  height: 100px;
+  border: 8px solid #20a54f;
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-bottom-color:transparent;
+  animation: rotate 1.5s linear infinite;
+  position: relative;
+  margin-bottom: 20px;
 }
-@keyframes loading {
-  100%{
-    transform: translate(200%);
+.search_circle_r {
+  width: 100px;
+  height: 100px;
+  border: 80px solid red;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color:transparent;
+  animation: rotate_r 1.5s linear infinite;
+  position: relative;
+  margin-bottom: 20px;
+}
+/*
+.search_handle {
+  width: 10px;
+  height: 40px;
+  background-color: #20a54f;
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  transform: rotate(45deg);
+  border-radius: 5px;
+}*/
+
+.pulse {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(32, 165, 79, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s infinite;
+}
+
+
+.loading_text {
+  font-size: 24px;
+  color: #20a54f;
+  font-family: "Roboto", sans-serif;
+  animation: fadeInOut 2.5s infinite;
+}
+
+.loading_subtext {
+  font-size: 18px;
+  color: #666;
+  margin-top: 10px;
+  animation: fadeInOut 3s infinite;
+}
+
+/* Animations */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
   }
-    
+  100% {
+    transform: rotate(360deg);
+  }
 }
-.loadingx{
-  backdrop-filter: blur(1px);
-  background: #1e263386;
-  position: fixed;
-  top:0;
-  bottom:0;
-  left:0;
-  right: 0;
-  z-index: 2;
+@keyframes rotate_r {
+  0% {
+    transform: rotate(100deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }

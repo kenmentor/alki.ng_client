@@ -2,15 +2,21 @@
 
 import React from "react";
 import "./map.css";
-const Map = ({lat,lon}) => {
+
+interface MapProps {
+  lat: number;
+  lon: number;
+}
+
+const Map: React.FC<MapProps> = ({ lat, lon }) => {
   return (
-  <div className="map">
-    <h3>
-      coming soon
-     // {lat},
-      {lon}//
-    </h3>
-  </div>
+    <div className="map">
+      <h3>
+        Coming soon
+        {/* Uncomment the lines below to display latitude and longitude */}
+        {/* {lat}, {lon} */}
+      </h3>
+    </div>
   );
 };
 

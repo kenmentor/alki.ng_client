@@ -6,7 +6,6 @@ import PrimaryDetail from "../primary detail/PrimaryDetail";
 import Map from "../map/Map";
 import "../costom_styles/jobDetail.css";
 import PeopleSearch from "../peopleSeach/PeopleSearch";
-import Bussadd from "../bussAdds/Bussadd";
 import Contact from "../contact/contact";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../loading/Loading";
@@ -14,107 +13,122 @@ import Posted_recently from "../posted_recently/posted_recently";
 import "../costom_styles/animation.css";
 import Costum_header from "../costum_header/costum_header";
 import { MdLocationPin } from "react-icons/md";
-const JobDetail_page = ({ thumbnail }) => {
-  let { id } = useParams();
-  let [data, setdata] = useState();
-  let [isLoading, setIsloading] = useState(true);
-  let [contact, setcontact] = useState(false);
+
+const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
+  const { id } = useParams<{ id: string }>();
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [contactVisible, setContactVisible] = useState<boolean>(false);
+  const [fullView, setFullView] = useState<boolean>(false);
+
   useEffect(() => {
-    let fetchData = async () => {
+    const fetchData = async () => {
       try {
-        await setIsloading(true);
-        await fetch(`http://localhost:3001/alki/jobdetail/${id}`)
-          .then((res) => res.json())
-          .then((data) => setdata(data));
-        setIsloading(false);
+        setIsLoading(true);
+        alert("fetching date");
+        const response = await fetch(
+          `http://localhost:3001/alki/jobdetail/${id}`
+        );
+        const result = await response.json();
+        setData(result);
+        console.log(result);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching job details:", error);
       } finally {
+        setIsLoading(false);
       }
     };
+
     fetchData();
   }, [id]);
 
+  const handleContactToggle = () => {
+    setContactVisible((prev) => !prev);
+  };
+
+  const toggleFullView = () => {
+    setFullView((prev) => !prev);
+  };
+
   if (isLoading) {
     return <Loading />;
-  } else {
-    //////
-    function handle_contact() {
-      setcontact((prev) => !prev);
-    }
-    
-    return (
-      <>
-        {contact && (
-          <Contact
-            setcontact={setcontact}
-            price={data.price}
-            type={data.type}
-            title={data.title}
-            contact_num={data.contact_num}
-          />
-        )}
-        <div className="container_ fadein">
-          <Costum_header title={data.title} classN={"header_"} />
-          <div className="detail_box">
-            <div className="import_information">
-              <div className="thumbnail_cont">
+  }
+
+  return (
+    <>
+      {contactVisible && (
+        <Contact
+          setContact={setContactVisible}
+          price={data.price}
+          type={data.type}
+          title={data.title}
+          contact_num={data.contact_num}
+        />
+      )}
+      <div className="container_ fadein">
+        <Costum_header title={data.title} classN="header_" />
+        <div className="detail_box">
+          <div className="import_information">
+            <div className="thumbnail_cont">
+              <div
+                className={`${fullView ? "fullview" : "thumnail_img"}`}
+                onClick={toggleFullView}
+              >
                 <img
-                  src={
-                    data.thumbnail ? data.thumbnail : "../default_thumbnail.jpg"
-                  }
+                  src={data.thumbnail || "/default_thumbnail.jpg"}
                   alt=""
-                  className=" slidein popin delay thumnail_detail"
+                  className={`slidein popin delay ${
+                    fullView ? "thumbnail_detail_fullview" : "thumnail_detail"
+                  }`}
+                  onDoubleClick={toggleFullView}
                 />
-
-                <div className="title_price slideinx delayx">
-                  <h5>
-                    <MdLocationPin size={20} />
-                    {data.LGA} {data.state}
-                  </h5>
-                  <h2>{data.title}</h2>
-                  <p>${data.price}</p>
-                </div>
               </div>
-
-              <PrimaryDetail
-                description={data.description}
-                price={data.price}
-                state={data.state}
-                type={data.type}
-                title={data.title}
-                LGA={data.LGA}
-                contact_num={data.contact_num}
-                date={data.createdAt}
-              />
-              <div className="contact_btn_cont">
-                <button
-                  className="contact_jobD_btn slideinx delay4"
-                  onClick={handle_contact}
-                >
-                  Contact now
-                </button>
+              <div className="title_price slideinx delayx">
+                <h5>
+                  <MdLocationPin size={20} />
+                  {data.LGA} {data.state}
+                </h5>
+                <h2>{data.title}</h2>
+                <p>${data.price}</p>
               </div>
             </div>
-            <div className="other_information">
-              <Map lat={data.lat} lon={data.lon} />
+
+            <PrimaryDetail
+              description={data.description}
+              price={data.price}
+              state={data.state}
+              type={data.type}
+              title={data.title}
+              LGA={data.LGA}
+              contact_num={data.contact_num}
+              date={data.createdAt}
+            />
+            <div className="contact_btn_cont">
+              <button
+                className="contact_jobD_btn slideinx delay4"
+                onClick={handleContactToggle}
+              >
+                Contact now
+              </button>
             </div>
           </div>
-          <Posted_recently
-            limit={3}
-            placeholder={"you may be interested in "}
-            state={data.state}
-            type={data.type}
-            title={data.title}
-            id={data.id}
-            reload={isLoading}
-          />
-          <Bussadd />
+          <div className="other_information">
+            <Map lat={data.lat} lon={data.lon} />
+          </div>
         </div>
-        <Footer />
-      </>
-    );
-  }
+        <Posted_recently
+          limit={3}
+          placeholder="You may be interested in"
+          state={data.state}
+          type={data.type}
+          title={data.title}
+          id={data.id}
+          reload={isLoading}
+        />
+      </div>
+      <Footer />
+    </>
+  );
 };
 
-export default JobDetail_page;
+export default JobDetailPage;
