@@ -47,7 +47,7 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
   });
   const [keypress, setkeypress] = useState<string>("enter");
   const [pageErro, setpageErro] = useState<boolean>(false);
-  const [contact, setcontact] = useState({ title: "saswssd" });
+  const [contact, setContact] = useState(true);
   const [total, settotal] = useState<number>(0);
   const [keyword, setkeyword] = useState<string>("");
 
@@ -209,7 +209,7 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
           filteredData={filteredData}
           setsearchQuery={setsearchQuery}
           setkeypress={setkeypress}
-          setcontact={setcontact}
+          setContact={setContact}
         />
       </div>
 

@@ -115,6 +115,7 @@
 }
 .fullview {
   animation: 0.3s pp forwards;
+ 
 }
 .thumbnail_detail_fullview {
   transition: 0.3s;
@@ -122,6 +123,7 @@
   height: 90%;
   object-fit: contain;
   border-radius: 10px;
+  
 }
 @keyframes pp {
   100% {
@@ -135,6 +137,5 @@
     align-items: center;
     justify-content: center;
     background-color: #050608a2;
-    position: fixed;
   }
 }

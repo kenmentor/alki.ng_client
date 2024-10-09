@@ -50,6 +50,7 @@ const Greeting: React.FC<MapProps> = ({ total }) => {
         setDisplayMessage((prev) => prev + message.charAt(index));
         setTimeout(() => typeMessage(message, index + 1), 50); // Typing speed
       }
+    
     };
 
     const showNextMessage = () => {

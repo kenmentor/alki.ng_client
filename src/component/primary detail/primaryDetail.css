@@ -17,10 +17,22 @@
   }
   ul {
     font-size: 18px;
+   
   }
   li {
     list-style-type: none;
     display: flex;
     align-items: center;
+    
+     margin-bottom:10px
+  }
+}
+@media(max-width:600px){
+  .primary_details {
+    li{
+    
+
+      display:block;
+    }
   }
 }
