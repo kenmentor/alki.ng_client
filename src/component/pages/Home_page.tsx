@@ -5,7 +5,7 @@ import Header from "../header/header";
 import Job_grid from "../job-grid/job_grid";
 import Footer from "../footer/footer";
 import Greeting from "../greeting/Greeting";
-import Loading from "../loading/Loading";
+import Loading from "../LoadingF/Loading";
 import Contact from "../contact/contact";
 import { MdCancel } from "react-icons/md";
 import "../peopleSeach/peopleSeach.css";

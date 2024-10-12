@@ -6,7 +6,7 @@ import Job_box from "../Jobs_box/job_box";
 import PeopleSearch from "../peopleSeach/PeopleSearch";
 // import Bussadd from "../bussAdds/Bussadd";
 import Job_box_p from "../jobs_box_p/Job_box_p";
-import Posted_recently from "../posted_recently/Posted_recently";
+import Posted_recently from "../postedRecently/Posted_recentlyCom";
 
 // Define props interface
 interface JobGridProps {

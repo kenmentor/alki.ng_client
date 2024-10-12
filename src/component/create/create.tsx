@@ -8,7 +8,7 @@ import Job_box_p from "../jobs_box_p/Job_box_p"; // PascalCase for components
 import "../costom_styles/animation.css";
 import { MdArrowBackIos, MdCancel, MdDone, MdError } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
-import Loadingx from "../loading/Loadingx";
+import Loadingx from "../LoadingF/secoundLoading";
 import states from "../../local_data/states";
 
 // Define types
