@@ -17,7 +17,7 @@ const Job_box = ({
   contact_num,
   id,
   clickable,
-  setcontact,
+  setContact,
 } = props) => {
   let [social_media, setsocial_media] = React.useState(false);
   let [full_d, setfull_d] = React.useState(false);
@@ -32,7 +32,7 @@ const Job_box = ({
     alert("pls wait...");
   }
   function handleChat() {
-    setcontact({ title: title, contact_num: contact_num, chat_state: true });
+    setContact({ title: title, contact_num: contact_num, chat_state: true });
   }
   function handlecall() {
     window.location.href = `tel:+${contact_num}`;

@@ -13,10 +13,32 @@ import Posted_recently from "../posted_recently/posted_recently";
 import "../costom_styles/animation.css";
 import Costum_header from "../costum_header/costum_header";
 import { MdLocationPin } from "react-icons/md";
+import ErroReload from "../erro page/erroReload";
 
-const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
-  const { id } = useParams<{ id: string }>();
-  const [data, setData] = useState<any>(null);
+// Define the shape of the data returned by the API
+interface JobData {
+  _id: string;
+  thumbnail: string;
+  title: string;
+  description: string;
+  price: number;
+  state: string;
+  LGA: string;
+  type: string;
+  contact_num: string;
+  createdAt: string;
+  lat: number;
+  lon: number;
+}
+
+// Define props for the component
+interface JobDetailPageProps {
+  thumbnail?: string; // Optional because you're using a default thumbnail if not provided
+}
+
+const JobDetailPage: React.FC<JobDetailPageProps> = ({ thumbnail }) => {
+  const { id } = useParams<{ id: string }>(); // Typing for URL parameters
+  const [data, setData] = useState<JobData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [contactVisible, setContactVisible] = useState<boolean>(false);
   const [fullView, setFullView] = useState<boolean>(false);
@@ -25,13 +47,11 @@ const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        alert("fetching date");
         const response = await fetch(
           `http://localhost:3001/alki/jobdetail/${id}`
         );
-        const result = await response.json();
+        const result: JobData = await response.json(); // Ensure correct type
         setData(result);
-        console.log(result);
       } catch (error) {
         console.error("Error fetching job details:", error);
       } finally {
@@ -52,6 +72,10 @@ const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (!data) {
+    return <ErroReload />;
   }
 
   return (
@@ -76,7 +100,7 @@ const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
               >
                 <img
                   src={data.thumbnail || "/default_thumbnail.jpg"}
-                  alt=""
+                  alt={data.title}
                   className={`slidein popin delay ${
                     fullView ? "thumbnail_detail_fullview" : "thumnail_detail"
                   }`}
@@ -122,7 +146,7 @@ const JobDetailPage: React.FC<{ thumbnail: string }> = ({ thumbnail }) => {
           state={data.state}
           type={data.type}
           title={data.title}
-          id={data.id}
+          id={data._id}
           reload={isLoading}
         />
       </div>

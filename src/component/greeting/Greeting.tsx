@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import "./greeting.css";
 import "../costom_styles/animation.css";
 
@@ -25,23 +25,21 @@ const Greeting: React.FC<MapProps> = ({ total }) => {
     "Stay ahead—explore job listings tailored for you!",
     "Big opportunities, small distances. Get started now!",
 
-  "You're among the first to explore amazing job opportunities!",
-  "Find your hustle and make it thrive with our tailored job listings!",
-  "Welcome to Alki.ng, where your career journey begins!",
-  "Opportunities are knocking! Open the door to your next big break!",
-  "Don't wait for luck—seize your dream job with us today!",
-  "Ready to level up? Your next job is just a click away!",
-  "Find local jobs that match your hustle today!",
-  "Dream big, work smart—start here!",
-  "Your breakthrough job is waiting around the corner!",
-  "Step into success—apply now for jobs near you!",
-  "Secure your future, one job at a time!",
-  "Looking for a better fit? Find jobs that suit you perfectly!",
-  "Achieve your goals with the right job for you!",
-  "Explore top job listings without leaving your state!",
-  "Stay ahead, stay sharp—new job openings daily!"
-
-
+    "You're among the first to explore amazing job opportunities!",
+    "Find your hustle and make it thrive with our tailored job listings!",
+    "Welcome to Alki.ng, where your career journey begins!",
+    "Opportunities are knocking! Open the door to your next big break!",
+    "Don't wait for luck—seize your dream job with us today!",
+    "Ready to level up? Your next job is just a click away!",
+    "Find local jobs that match your hustle today!",
+    "Dream big, work smart—start here!",
+    "Your breakthrough job is waiting around the corner!",
+    "Step into success—apply now for jobs near you!",
+    "Secure your future, one job at a time!",
+    "Looking for a better fit? Find jobs that suit you perfectly!",
+    "Achieve your goals with the right job for you!",
+    "Explore top job listings without leaving your state!",
+    "Stay ahead, stay sharp—new job openings daily!",
   ];
 
   useEffect(() => {
@@ -50,7 +48,6 @@ const Greeting: React.FC<MapProps> = ({ total }) => {
         setDisplayMessage((prev) => prev + message.charAt(index));
         setTimeout(() => typeMessage(message, index + 1), 50); // Typing speed
       }
-    
     };
 
     const showNextMessage = () => {
@@ -73,15 +70,15 @@ const Greeting: React.FC<MapProps> = ({ total }) => {
   return (
     <div className="greeting_space">
       <div className="greeting_cont slide-up">
-      <div className="greeting">
-        <div className="text">
-          <h1>{displayMessage}</h1>
+        <div className="greeting">
+          <div className="text">
+            <h1>{displayMessage}</h1>
+          </div>
+          <div className="greeting_sub_text">Connect with Opportunities</div>
         </div>
-        <div className="greeting_sub_text">Connect with Opportunities</div>
       </div>
-    </div>
     </div>
   );
 };
 
-export default Greeting;
+export default memo(Greeting);

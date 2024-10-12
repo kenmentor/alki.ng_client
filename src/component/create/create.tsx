@@ -36,7 +36,10 @@ type Error = {
 };
 
 const Create: React.FC = () => {
-  const [postcomplete, setPostComplete] = useState(undefined);
+  const [postcomplete, setPostComplete] = useState({
+    nosuccess: false,
+    success: false,
+  });
   const [post, setPost] = useState<Record<string, any>>({});
   const [prevImage, setPrevImage] = useState<string>("");
   const [stage, setStage] = useState<number>(1);
@@ -155,11 +158,11 @@ const Create: React.FC = () => {
         body: form,
       });
       alert(response.ok);
-      setPostComplete(true);
+      handleComplete(true);
       setServerMessage("Job posted successfully!");
     } catch (error) {
       console.error(error);
-      setPostComplete(false);
+      handleComplete(false);
     } finally {
       setLoadingx(false);
     }
@@ -203,14 +206,26 @@ const Create: React.FC = () => {
     return { errostate: false, erromesage: "", field: "" };
   };
 
+  function goBack() {
+    history.back();
+  }
+  function handleComplete(state) {
+    if (state) {
+      return setPostComplete({ nosucsess: false, success: true });
+    }
+    return setPostComplete({ success: false, nosucsess: true });
+  }
+
   return (
     <>
       <div className="container fadein">
         <div className="header create_header ">
           <div className="back_arrow">
-            <Link to={"/"}>
-              <MdArrowBackIos size={35} />
-            </Link>
+            <MdArrowBackIos
+              size={35}
+              onClick={goBack}
+              style={{ cursor: "pointer" }}
+            />
           </div>
           <h2>Post a Job Add</h2>
           <div className="progress" style={{ width: `${progress}%` }}></div>
@@ -403,17 +418,19 @@ const Create: React.FC = () => {
           {stage === 4 && (
             <div className="stage">
               <div
-                className={
-                  validateForm(form).errostate ? `erro_message` : "no_erro"
-                }
+                className={`
+                  ${validateForm(form).errostate ? `erro_message` : "no_erro"}
+                  poping
+                `}
               >
                 <div className="icon">
                   <MdCancel size={20} />
                 </div>
                 {validateForm(form).erromesage}
               </div>
+              <br />
+              <br />
 
-              <h2>preview post</h2>
               <div className="prev_jobGrid">
                 {form.type == "professional_job" ? (
                   <Job_box_p
@@ -445,7 +462,7 @@ const Create: React.FC = () => {
               </div>
             </div>
           )}
-          {postcomplete === true && (
+          {postcomplete.success === true && (
             <div className="post_cont_backdrop">
               <div className="post_state">
                 <MdDone
@@ -460,15 +477,21 @@ const Create: React.FC = () => {
               </div>
             </div>
           )}
-          {postcomplete === false && (
+          {postcomplete.nosuccess === true && (
             <div className="post_cont_backdrop">
               <div className="post_state">
                 <MdError size={60} />
                 <h1>an erro occured</h1>
-                <Link to={"/"}>
-                  <button className="next">try again later</button>
-                  {serverMessage}
-                </Link>
+
+                <button
+                  className="next"
+                  onClick={() =>
+                    setPostComplete({ nosuccess: false, success: false })
+                  }
+                >
+                  try again later
+                </button>
+                {serverMessage}
               </div>
             </div>
           )}

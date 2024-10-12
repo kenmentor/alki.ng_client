@@ -27,11 +27,14 @@ const PrimaryDetail: React.FC<PrimaryDetailProps> = ({
 }) => {
   // Type the arguments for the function
   function formatDate(date: string, num: number): string {
-    let formattedData: string[] = [];
-    for (let i = 0; i < num; i++) {
-      formattedData.push(date[i]);
+    if (date) {
+      let formattedData: string[] = [];
+      for (let i = 0; i < num; i++) {
+        formattedData.push(date[i]);
+      }
+      return formattedData.join("");
     }
-    return formattedData.join("");
+    return "date not tracted";
   }
 
   return (

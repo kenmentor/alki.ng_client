@@ -21,7 +21,7 @@ interface HeaderProps {
   >;
   setfilter_input: (input: any) => void; // Specify a more detailed type if available
   filter_input: any; // Specify a more detailed type if available
-  setmode: (mode: boolean) => void;
+ 
   setkeypress: (key: string) => void;
 }
 
@@ -32,7 +32,6 @@ const Header: React.FC<HeaderProps> = ({
   setside_buttons,
   setfilter_input,
   filter_input,
-  setmode,
   setkeypress,
 }) => {
   const toggle_create = () => {

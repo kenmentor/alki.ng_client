@@ -10,13 +10,9 @@ import Contact from "../contact/contact";
 import { MdCancel } from "react-icons/md";
 import "../peopleSeach/peopleSeach.css";
 import "../costom_styles/costom.css";
+import ErroReload from "../erro page/erroReload";
 
 // Define the types for the props
-interface HomePageProps {
-  mode: string;
-  setmode: React.Dispatch<React.SetStateAction<string>>;
-}
-
 interface FilterInput {
   jobtype: string;
   max_price: number;
@@ -30,64 +26,63 @@ interface Job {
   state: string;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
-  const [data, setdata] = useState<Job[]>([]);
-  const [loading, setloading] = useState<boolean>(true);
-  const [side_buttons, setside_buttons] = useState({
+interface ContactData {
+  title: string;
+  contact_num: string;
+  chat_state?: boolean;
+}
+
+const HomePage: React.FC = () => {
+  const [data, setData] = useState<Job[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [side_buttons, setSideButtons] = useState({
     create: false,
     filter: false,
     more: false,
   });
-  const [searchQuery, setsearchQuery] = useState<string>("");
-  const [filter_input, setfilter_input] = useState<FilterInput>({
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filter_input, setFilterInput] = useState<FilterInput>({
     jobtype: "",
     max_price: Number.MAX_SAFE_INTEGER,
     min_price: 0,
     joblocation: "",
   });
-  const [keypress, setkeypress] = useState<string>("enter");
-  const [pageErro, setpageErro] = useState<boolean>(false);
-  const [contact, setContact] = useState(true);
-  const [total, settotal] = useState<number>(0);
-  const [keyword, setkeyword] = useState<string>("");
+  const [keypress, setKeypress] = useState<string>("enter");
+  const [pageErro, setPageErro] = useState<boolean>(false);
+  const [contact, setContact] = useState<ContactData | null>(null);
+  const [total, setTotal] = useState<number>(0);
+  const [keyword, setKeyword] = useState<string>("");
 
   // Fetch data with useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `http://localhost:3001/alki/get_jobs/?search=${searchQuery}`
+        );
+        const result = await response.json();
+        setData(result.data);
+        setTotal(result.totalJob);
+        setKeyword(result.search_message);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setPageErro(true);
+      } finally {
+        setLoading(false);
+        setKeypress("key");
+      }
+    };
 
-  function fetchdata() {
-    useEffect(() => {
-      let fetchData = async () => {
-        try {
-          fetch(`http://localhost:3001/alki/get_jobs/?search=${searchQuery}`)
-            .then((res) => res.json())
-            .then((response) => {
-              setdata(response.data);
-              settotal(response.totalJob);
-              setkeyword(response.search_message);
-            })
-            .then(() => setloading(false))
-            .then(() => setkeypress("key"));
-        } catch (error) {
-          await alert(error);
-          setpageErro(true);
-          setloading(false);
-        } finally {
-        }
-      };
-      fetchData();
-    }, [keypress === "Enter"]);
+    fetchData();
+  }, [searchQuery]);
+
+  if (pageErro) {
+    return <ErroReload />;
   }
-  fetchdata();
 
   if (loading) {
     return <Loading />;
-  }
-
-  if (pageErro) {
-    return (
-      <h2>
-        An error occurred. <a href="/">Go to home</a>
-      </h2>
-    );
   }
 
   // Filter jobs
@@ -112,7 +107,7 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
     const field = e.currentTarget.className.baseVal;
 
     if (field === "price") {
-      setfilter_input((prev) => ({
+      setFilterInput((prev) => ({
         ...prev,
         max_price: Number.MAX_SAFE_INTEGER,
         min_price: 0,
@@ -120,7 +115,7 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
       return "complete";
     }
 
-    setfilter_input((prev) => ({
+    setFilterInput((prev) => ({
       ...prev,
       [field]: "",
     }));
@@ -130,18 +125,16 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
     <>
       <div className="container">
         <Header
-          setsearchQuery={setsearchQuery}
+          setsearchQuery={setSearchQuery}
           searchQuery={searchQuery}
           side_buttons={side_buttons}
-          setside_buttons={setside_buttons}
-          setfilter_input={setfilter_input}
+          setside_buttons={setSideButtons}
+          setfilter_input={setFilterInput}
           filter_input={filter_input}
-          mode={mode}
-          setmode={setmode}
-          setkeypress={setkeypress}
+          setkeypress={setKeypress}
         />
 
-        <Greeting data={data} mode={mode} setmode={setmode} total={total} />
+        <Greeting total={total} />
 
         <div className="applyed_fiters">
           {(filter_input.jobtype ||
@@ -196,7 +189,7 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
 
         {contact && contact.chat_state && (
           <Contact
-            setcontact={setcontact}
+            setcontact={setContact}
             price={666}
             type={"eee"}
             title={contact.title}
@@ -207,8 +200,8 @@ const HomePage: React.FC<HomePageProps> = ({ mode, setmode }) => {
 
         <Job_grid
           filteredData={filteredData}
-          setsearchQuery={setsearchQuery}
-          setkeypress={setkeypress}
+          setsearchQuery={setSearchQuery}
+          setkeypress={setKeypress}
           setContact={setContact}
         />
       </div>
