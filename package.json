@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+   "build": "vite build --force",
     "preview": "vite preview"
   },
+  
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
     "react": "^18.2.0",

@@ -189,7 +189,7 @@ const HomePage: React.FC = () => {
 
         {contact && contact.chat_state && (
           <Contact
-            setcontact={setContact}
+            setContact={setContact}
             price={666}
             type={"eee"}
             title={contact.title}
